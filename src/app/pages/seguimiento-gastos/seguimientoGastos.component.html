@@ -3,3 +3,88 @@
         <h5 class="card-title">Seguimiento Gastos</h5>
     </div>
 </div>
+
+<!-- data -->
+<div class="tabs m-2">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'formulario'" (click)="setActiveTab('formulario')">Añadir
+                gastos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'gastos'" (click)="setActiveTab('gastos')">Ver
+                gastos</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div *ngIf="activeTab === 'formulario'" class="tab-pane active">
+            <!-- Aquí va el contenido del formulario -->
+            <h3 class="mt-2 text-center">Añadir nuevo gasto</h3>
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="categoria">Categoría</label>
+                            <input type="text" class="form-control" id="categoria" [(ngModel)]="categoria"
+                                name="categoria">
+                        </div>
+                        <div class="form-group">
+                            <label for="concepto">Concepto</label>
+                            <input type="text" class="form-control" id="concepto" [(ngModel)]="concepto"
+                                name="concepto">
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <textarea class="form-control" id="descripcion" [(ngModel)]="descripcion"
+                                name="descripcion"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" class="form-control" id="fecha" [(ngModel)]="fecha" name="fecha">
+                        </div>
+                        <div class="form-group">
+                            <label for="monto">Monto</label>
+                            <input type="number" class="form-control" id="monto" [(ngModel)]="monto" name="monto">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mt-3" (click)="saveGast()">Enviar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="activeTab === 'gastos'" class="tab-pane active">
+            <!-- Aquí va el contenido del formulario -->
+            <h3 class="mt-2 text-center">Productos</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table caption-top">
+                            <caption>Lista de productos</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">concepto</th>
+                                    <th scope="col">categoria</th>
+                                    <th scope="col">monto</th>
+                                    <th scope="col">fecha</th>
+                                    <th scope="col">descripcion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let gastos of dataGastos" class="text-center">
+                                    <th>{{ gastos.id }}</th>
+                                    <td>{{ gastos.concepto }}</td>
+                                    <td>{{ gastos.categoria }}</td>
+                                    <td>{{ '$'+gastos.monto }}</td>
+                                    <td>{{ gastos.fecha }}</td>
+                                    <td>{{ gastos.descripcion }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

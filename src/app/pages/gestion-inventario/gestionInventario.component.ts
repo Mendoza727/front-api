@@ -4,7 +4,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { NavsComponent } from "../navs/navs.component";
 import { GlobalService } from "src/app/global.service";
 import { TitleService } from "src/app/services/title.service";
-import { NgIf } from "@angular/common";
+import { NgForOf, NgIf } from "@angular/common";
 
 
 @Component({
@@ -17,17 +17,20 @@ import { NgIf } from "@angular/common";
         ReactiveFormsModule,
         NgxSpinnerModule,
         NavsComponent,
-        NgIf
+        NgIf,
+        NgForOf
     ]
 })
 export class GestionInventarioComponent implements OnInit {
-    activeTab = 'formulario';
+    activeTab = 'productos';
 
     nombre: string = '';
     descripcion: string = '';
     precio: number = 0;
     cantidad: number = 0;
     proveedor: string = '';
+
+    dataInventario = new Array();
 
     constructor(
         private globalService: GlobalService,
@@ -37,6 +40,8 @@ export class GestionInventarioComponent implements OnInit {
 
     ngOnInit(): void {
         this.titleService.setTitle('Seguimiento Inventario')
+
+        this.consultarProductos();
     }
 
 
@@ -59,6 +64,57 @@ export class GestionInventarioComponent implements OnInit {
 
 
 
-        
+        this.globalService.consultar('/gestion-inventario', data).subscribe(
+            (response: any) => {
+                if (response.status === 'success') {
+
+                    //consultamos los datos
+                    this.consultarProductos();
+
+
+                    this.activeTab = 'productos'
+                    setTimeout(() => {
+                        this.spinner.hide('sp5')
+                    }, 250);
+                } else {
+                    setTimeout(() => {
+                        this.spinner.hide('sp5');
+                    }, 250)
+                }
+            },
+            (err: any) => {
+                console.error('Error al guardar el evento');
+
+                setTimeout(() => {
+                    this.spinner.hide('sp5');
+                }, 250);
+            }
+         )
+    }
+
+    consultarProductos() {
+        this.spinner.show('sp5');
+
+        const data = {
+            consult_productos: true
+        }
+
+
+        this.globalService.consultar('/gestion-inventario', data).subscribe(
+            async(response: any) => {
+                if (response['status'] === 'success') {
+                    this.dataInventario = await response.productos
+
+                    console.log(this.dataInventario);
+
+                    setTimeout(() => {
+                        this.spinner.hide('sp5');
+                    }, 250)
+                }
+            },
+            (error: any) => {
+                console.error("Error al consultar");
+            }
+        )
     }
 }

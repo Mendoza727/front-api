@@ -78,15 +78,15 @@ export class GestionEventoComponent implements OnInit {
                 if (response.status === 'success') {
 
                     // consultamos los datos
-                    this.consultarEvento()
+                    this.consultarEvento();
 
                     this.activeTab = 'informacion'
                     setTimeout(() => {
-                        this.spinner.hide();
+                        this.spinner.hide('sp5');
                     }, 250)
                 } else {
                     setTimeout(() => {
-                        this.spinner.hide();
+                        this.spinner.hide('sp5');
                     }, 250)
                 }
             },
@@ -94,7 +94,7 @@ export class GestionEventoComponent implements OnInit {
                 console.error('Error al guardar el evento');
 
                 setTimeout(() => {
-                    this.spinner.hide();
+                    this.spinner.hide('sp5');
                 }, 250)
             }
         )
@@ -113,8 +113,6 @@ export class GestionEventoComponent implements OnInit {
             async (response: any) => {
                 if (response['status'] === 'success') {
                     this.dataEventos = await response['events']
-
-                    console.log(this.dataEventos);
 
                     setTimeout(() => {
                         this.spinner.hide('sp5');

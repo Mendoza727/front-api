@@ -26,6 +26,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const desencriptedData = this.sessionStorage.decryptData(localStorage.getItem('user'));
+
+    if (desencriptedData !== null) {
+      this.globalService.DatosUsuario = desencriptedData;
+      console.log(this.globalService.DatosUsuario);
+    }
+
+
     this.obtenerRutas();
   }
 

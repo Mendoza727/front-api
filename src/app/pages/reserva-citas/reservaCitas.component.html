@@ -1,5 +1,81 @@
+<ngx-spinner name="sp5" [fullScreen]="true" type="square-jelly-box" size="medium"></ngx-spinner>
 <div class="card text-center m-2">
     <div class="card-body">
         <h5 class="card-title">Reservar Citas</h5>
+    </div>
+</div>
+
+<!-- data -->
+<div class="tabs m-2">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'formulario'" (click)="setActiveTab('formulario')">Añadir
+                Productos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'citas'" (click)="setActiveTab('citas')">Ver
+                productos</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div *ngIf="activeTab === 'formulario'" class="tab-pane active">
+            <!-- Aquí va el contenido del formulario -->
+            <h3 class="mt-2 text-center">Añadir nueva cita</h3>
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="tipo_cita" class="form-label">Tipo de Cita</label>
+                            <input type="text" class="form-control" id="tipo_cita" name="tipo_cita" [(ngModel)]="tipoCita" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hora" class="form-label">Hora</label>
+                            <input type="time" class="form-control" id="hora" name="hora" [(ngModel)]="hora" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" [(ngModel)]="fecha" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nota" class="form-label">Nota</label>
+                            <textarea class="form-control" id="nota" name="nota" [(ngModel)]="nota" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100" (click)="saveDating()">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="activeTab === 'citas'" class="tab-pane active">
+            <!-- Aquí va el contenido del formulario -->
+            <h3 class="mt-2 text-center">Citas activas</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table caption-top">
+                            <caption>Lista de productos</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">cita</th>
+                                    <th scope="col">solicitante</th>
+                                    <th scope="col">fecha</th>
+                                    <th scope="col">hora</th>
+                                    <th scope="col">observaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cita of dataCitas" class="text-center">
+                                    <th>{{ cita.tipo_cita }}</th>
+                                    <td>{{ cita.id_usuario }}</td>
+                                    <td>{{  cita.fecha}}</td>
+                                    <td>{{  cita.hora }}</td>
+                                    <td>{{  cita.nota }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

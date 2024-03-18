@@ -1,25 +1,37 @@
-<nav class="d-flex d-lg-none d-lg-none d-md-none navbar navbar-expand-lg bg-body-tertiary" *ngIf="mostrarNav">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">project</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3">
-          <li class="nav-item" *ngFor="let ruta of rutas">
-            <a class="nav-link rounded text-center" [ngClass]="{'active text-light': esRutaActiva(ruta.url)}" aria-current="page" href="{{ ruta.url }}">{{ ruta.title }}</a>
-          </li>
-        </ul>
-        <hr class="divider">
-        <button type="button" class="btn btn-danger w-100" (click)="logout()">Logout</button>
+<nav class="d-flex d-lg-none d-lg-none d-md-flex navbar navbar-expand-lg bg-body-tertiary" *ngIf="mostrarNav">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">project</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <!-- profile movil -->
+      <div class="card mt-4">
+        <div class="card-body">
+          <a href="#" class="p-3 m-2 d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong>{{ globalService.DatosUsuario['username'] }}</strong><br>
+          </a>
+        </div>
       </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3">
+        <li class="nav-item" *ngFor="let ruta of rutas">
+          <a class="nav-link rounded text-center" [ngClass]="{'active text-light': esRutaActiva(ruta.url)}"
+            aria-current="page" href="{{ ruta.url }}">{{ ruta.title }}</a>
+        </li>
+      </ul>
+      <hr class="divider">
+      <button type="button" class="btn btn-danger w-100" (click)="logout()">Logout</button>
     </div>
+  </div>
 </nav>
 <div style="display: flex;">
-    <div *ngIf="mostrarNav">
-        <app-navs></app-navs>
-    </div>
-    <div style="flex: 1 1 auto; overflow: hidden;">
-        <router-outlet></router-outlet>
-    </div>
+  <div *ngIf="mostrarNav">
+    <app-navs></app-navs>
+  </div>
+  <div style="flex: 1 1 auto; overflow: hidden;">
+    <router-outlet></router-outlet>
+  </div>
 </div>
