@@ -1,0 +1,90 @@
+<ngx-spinner name="sp5" [fullScreen]="true" type="square-jelly-box" size="medium"></ngx-spinner>
+<div class="card text-center m-2">
+    <div class="card-body">
+        <h5 class="card-title">Gestion Evento</h5>
+    </div>
+</div>
+
+
+<!-- informacion -->
+<div class="tabs m-2">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'formulario'" (click)="setActiveTab('formulario')">Añadir
+                Evento</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'informacion'" (click)="setActiveTab('informacion')">Ver
+                Eventos</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div *ngIf="activeTab === 'formulario'" class="tab-pane active">
+            <!-- Aquí va el contenido del formulario -->
+            <h3 class="mt-2 text-center">Añadir nuevo Evento</h3>
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="titulo" class="form-label">Título:</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required
+                                [(ngModel)]="titulo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"
+                                [(ngModel)]="descripcion"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha" class="form-label">Fecha:</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" required
+                                [(ngModel)]="fecha">
+                        </div>
+                        <div class="mb-3">
+                            <label for="hora" class="form-label">Hora:</label>
+                            <input type="time" class="form-control" id="hora" name="hora" required [(ngModel)]="hora">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ubicacion" class="form-label">Ubicación:</label>
+                            <input type="text" class="form-control" id="ubicacion" name="ubicacion"
+                                [(ngModel)]="ubicacion">
+                        </div>
+                        <button type="button" class="btn btn-primary w-100" (click)="registrarEvento()">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="activeTab === 'informacion'" class="tab-pane active">
+            <!-- Aquí va el contenido del formulario -->
+            <h3 class="mt-2 text-center">Eventos Creados</h3>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table caption-top">
+                            <caption>Lista de eventos</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">titulo</th>
+                                    <th scope="col">descripcion</th>
+                                    <th scope="col">fecha</th>
+                                    <th scope="col">hora</th>
+                                    <th scope="col">ubicacion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let evento of dataEventos" class="text-center">
+                                    <th>{{ evento.titulo }}</th>
+                                    <td>{{ evento.descripcion }}</td>
+                                    <td>{{ evento.fecha }}</td>
+                                    <td>{{ evento.hora }}</td>
+                                    <td>{{ evento.ubicacion }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

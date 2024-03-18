@@ -1,0 +1,68 @@
+<ngx-spinner name="sp5" [fullScreen]="true" type="square-jelly-box" size="medium"></ngx-spinner>
+<div class="card text-center m-2">
+    <div class="card-body">
+        <h5 class="card-title">Gestion Inventario</h5>
+    </div>
+</div>
+
+<!-- data -->
+<div class="tabs m-2">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'formulario'" (click)="setActiveTab('formulario')">Añadir
+                Productos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 'productos'" (click)="setActiveTab('productos')">Ver
+                productos</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div *ngIf="activeTab === 'formulario'" class="tab-pane active">
+            <!-- Aquí va el contenido del formulario -->
+            <h3 class="mt-2 text-center">Añadir nuevo producto</h3>
+            <div class="card">
+                <div class="card-body">
+                    <form #formulario="ngForm">
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                [(ngModel)]="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción:</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion"
+                                [(ngModel)]="descripcion" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="precio">Precio:</label>
+                            <input type="number" class="form-control" id="precio" name="precio"
+                                [(ngModel)]="precio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad:</label>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad"
+                                [(ngModel)]="cantidad" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="proveedor">Proveedor:</label>
+                            <input type="text" class="form-control" id="proveedor" name="proveedor"
+                                [(ngModel)]="proveedor" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2 w-100">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="activeTab === 'productos'" class="tab-pane active">
+            <!-- Aquí va el contenido del formulario -->
+            <h3 class="mt-2 text-center">Productos</h3>
+            <div class="card">
+                <div class="card-body">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
